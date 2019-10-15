@@ -20,9 +20,16 @@ If the conditions are not satisfied, it should send an error message and skip op
 
 After the optimization, the code should print out solution and computation time.
 
+### Final submision
+You should submit a copy of this repository with modified "optimizer_main.cpp", "Optimizer.hpp", "CMakelist.txt" and others if you need. To test your code, we will simply run following
 
+```bash
+rosrun ros_QP_assignment optimizer_main
+```
 
-### test input 
+and test it with different parameters send from "rostopic pub"
+
+### test input
 
 ```bash
 rostopic pub "/optimization_parameters" std_msgs/Float64MultiArray "layout:
@@ -34,6 +41,10 @@ rostopic pub "/optimization_parameters" std_msgs/Float64MultiArray "layout:
 data: [1,0,0,2,2,1]" 
 ```
 in this test Q = diag(1,2) , c = (2,1) 
+
+
+
+
 
 ## Dependencies
 * [Ros Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu) (or Kinetic)
