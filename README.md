@@ -7,9 +7,10 @@ In this assignment, you are asked to write a cpp header, which calculate followi
 ```math
 min 1/2 x^TQx +c^Tx
 ```
-where Q is a n by n matrix and c is a 1 by n vector.
+where Q is a n by n matrix and c is a 1 by n vector. These parameters will be send to your program through a publisher with name "/optimization_parameters" with msg type [Float64MultiArray](http://docs.ros.org/melodic/api/std_msgs/html/msg/Float64MultiArray.html). The msg will contain n*(n+1) parameter for each Q and c. The first n*n parameters are the elements of Q matrix and the Q matrix is flattened row by row (flatten(Q) = (row1, row2,..., rown) )
 
-http://docs.ros.org/melodic/api/std_msgs/html/msg/Float64MultiArray.html
+
+
 
 
 
