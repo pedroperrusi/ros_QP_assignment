@@ -2,13 +2,16 @@
 
 
 ## Assignment
-In this assignment, you are asked to write a cpp header, which calculate
+In this assignment, you are asked to write a cpp header, which calculate following quadratic optimization with the parameters coming from ROS message. The quadratic optimization is in the following form.
+
+```math
+min 1/2 x^TQx +c^Tx
+```
+where Q is a n by n matrix and c is a 1 by n vector.
 
 http://docs.ros.org/melodic/api/std_msgs/html/msg/Float64MultiArray.html
 
-```math #yourmathlabel
-a + b = c
-```
+
 
 
 
