@@ -10,7 +10,7 @@ min 1/2 x^TQx + c^Tx
 
 where Q is a n by n matrix and c is a 1 by n vector. These parameters will be send to your program through a publisher named "/optimization_parameters" with msg type [Float64MultiArray](http://docs.ros.org/melodic/api/std_msgs/html/msg/Float64MultiArray.html). The msg will contain n*(n+1) parameter for each Q and c. The first n*n parameters are the elements of Q matrix and the Q matrix is flattened row by row (flatten(Q) = (row_1, row_2,..., row_n) ). Last n element of the msg corresponds to the c vector.
 
-The dimension of optimization will depend on the dimension of the parameters received in ros msg. We are going to test your code with n<=6. In ideal case, the optimization should be writen parametrically such that it works with any positive integer value of n. But hard coded switch/case structure is also accepted (for this case your code should send a warning message if size of the optimization is not covered by the code).
+The dimension of optimization will depend on the dimension of the parameters received in ros msg. We are going to test your code with n<=6. In the ideal case, the optimization should be writen parametrically such that it works with any positive integer value of n. But hardcoded switch/case structure is also accepted (for this case your code should send a warning message if size of the optimization is not covered by the code).
 
 Your callback function should check whether
 * the dimension of the msg data is n*(n+1) and
@@ -19,6 +19,7 @@ If the conditions are not satisfied, it should send an error message and skip op
 
 
 After the optimization, the code should print out solution and computation time.
+
 
 ### Final submision
 You should submit a copy of this repository with modified "optimizer_main.cpp", "Optimizer.hpp", "CMakelist.txt" and others if you need. To test your code, we will simply run following
@@ -44,8 +45,6 @@ in this test Q = diag(1,2) , c = (2,1)
 
 
 
-
-
 ## Dependencies
 * [Ros Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu) (or Kinetic)
 * [Catkin tools](https://catkin-tools.readthedocs.io/en/latest/)
@@ -53,7 +52,7 @@ in this test Q = diag(1,2) , c = (2,1)
 * [Ceres](http://ceres-solver.org/installation.html)
 
 
-## How to run test code
+## How to run Ceres test code
 If you dont have a "catkin_ws", create one
 
 ```bash
