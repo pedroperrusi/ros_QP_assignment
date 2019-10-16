@@ -1,4 +1,4 @@
-# ros_QP_assignment
+# ros_qp_assignment
 
 
 ## Assignment
@@ -32,13 +32,13 @@ catkin init
 Then, clone the repository to your "catkin_ws/src"
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/MEfeTiryaki/ros_QP_assignment.git
+git clone https://github.com/MEfeTiryaki/ros_qp_assignment.git
 ```
 
 build the code
 ```bash
 cd ~/catkin_ws
-catkin build ros_QP_assignment
+catkin build ros_qp_assignment
 ```
 
 source it
@@ -50,5 +50,5 @@ source devel/setup.bash
 
 run the test
 ```bash
-rosrun ros_QP_assignment ceres_test
+rosrun ros_qp_assignment ceres_test
 ```

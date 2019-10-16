@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ros_QP_assignment</name>
+  <name>ros_qp_assignment</name>
   <version>0.0.0</version>
   <description> Ros package for quadratic optimization with Ceres </description>
   <maintainer email="tiryaki@is.mpg.de">Mehmet Efe Tiryaki</maintainer>

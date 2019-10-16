@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-#include "ros_QP_assignment/Optimizer.hpp"
+#include "ros_qp_assignment/Optimizer.hpp"
 
 int main(int argc, char **argv) {
   // your optimizer class
