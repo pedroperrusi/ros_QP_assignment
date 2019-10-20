@@ -24,25 +24,6 @@ using ceres::Solver;
 
 using namespace ros_qp;
 
-class UnconstrQuadratic : public ceres::FirstOrderFunction {
-   public:
-    explicit UnconstrQuadratic(const QuadraticCoeffs &coeffs)
-        : coeffs_(coeffs) {}
-
-    virtual ~UnconstrQuadratic() {}
-
-    virtual bool Evaluate(const double *parameters, double *cost,
-                          double *gradient) const {
-        quadraticCost(coeffs_, parameters, cost);
-        if (gradient != NULL) {
-            quadraticGrad(coeffs_, parameters, gradient);
-        }
-        return true;
-    }
-    virtual int NumParameters() const { return coeffs_.order; }
-    const QuadraticCoeffs coeffs_;
-};
-
 int main(int argc, char **argv) {
     google::InitGoogleLogging(argv[0]);
     double parameters[3] = {1, 1, 1};
@@ -56,7 +37,7 @@ int main(int argc, char **argv) {
     options.line_search_direction_type = ceres::BFGS;
     //   options.use_approximate_eigenvalue_bfgs_scaling = true;
     ceres::GradientProblemSolver::Summary summary;
-    ceres::GradientProblem problem(new UnconstrQuadratic(coeffs));
+    ceres::GradientProblem problem(new UnconstrainedQP(coeffs));
     ceres::Solve(options, problem, parameters, &summary);
     std::cout << summary.FullReport() << "\n";
     std::cout << "Initial x: " << 1.0 << " y: " << 1.0 << " z: " << 1.0 << "\n";
