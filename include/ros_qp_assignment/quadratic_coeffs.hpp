@@ -78,5 +78,15 @@ struct QuadraticCoeffs {
      * @return Matrix of shape order by 1.
      */
     inline MatrixType getC() const { return c; }
+
+    inline bool isValid() const {
+        /** Check for a positive matrix order */
+        if (order <= 0) return false;  // should never happen
+        /** Check if order corresponds to number of elements */
+        if (order * (order + 1) != data_arr.size()) return false;
+        /** Check if Q is a symmetric matrix */
+        if (!q.isApprox(q.transpose())) return false;
+        return true;
+    }
 };
 }  // namespace ros_qp

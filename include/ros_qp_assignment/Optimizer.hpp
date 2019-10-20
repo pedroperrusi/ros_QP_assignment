@@ -44,6 +44,7 @@ class Optimizer {
         const std_msgs::Float64MultiArray::ConstPtr& msg) {
         /* Deserialize coeffitients */
         ros_qp::QuadraticCoeffs coeffs(msg->data.size(), msg->data.data());
+	if (!validInput(coeffs)) return;
         parameters_.resize(coeffs.order);
         std::fill(parameters_.begin(), parameters_.end(), 1);
         /** Initialize optimization routine */
@@ -61,6 +62,15 @@ class Optimizer {
         std::cout << solution << std::endl;
         std::cout << "Convergence time:" << std::endl;
         std::cout << summary_.total_time_in_seconds << std::endl;
+    }
+
+    inline bool validInput(const ros_qp::QuadraticCoeffs& coeffs) {
+      if (coeffs.isValid()) return true;
+      std::cerr << "Error: Quadratic coefficients received are not valid" << std::endl;
+      // std::cerr << "N: " << coeffs.order << std::endl;
+      // std::cerr << "Q: \n" << coeffs.q << std::endl;
+      // std::cerr << "c: \n" << coeffs.c << std::endl;
+      return false;
     }
 
    private:
