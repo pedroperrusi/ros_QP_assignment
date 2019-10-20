@@ -15,7 +15,7 @@ catkin_package(
 
 include_directories(
   include
-  # ${catkin_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS}
   ${CERES_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
 )
@@ -26,7 +26,7 @@ add_executable(ceres_test
   test/ceres_test.cpp
 )
 target_link_libraries(ceres_test
-  # ${catkin_LIBRARIES}
+  ${catkin_LIBRARIES}
   ${CERES_LIBRARIES}
   ${EIGEN3_LIBRARIES}
 )
@@ -35,6 +35,13 @@ target_link_libraries(ceres_test
 add_executable(quadratic_test
   test/quadratic_test.cpp
 )
+
+target_include_directories(quadratic_test
+  PUBLIC
+  ${PROJECT_SOURCE_DIR}/include/
+  ${EIGEN3_INCLUDE_DIR}
+)
+
 target_link_libraries(quadratic_test
   ${catkin_LIBRARIES}
   ${CERES_LIBRARIES}

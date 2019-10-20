@@ -12,18 +12,26 @@
   "Float64MultiArray". When a msg received, this class should solve the
   optimization problem with received parameters and print the result.
 */
+#pragma once
+
+#include "ros_qp_assignment/types.hpp"
+
+namespace ros_qp {
+
 class Optimizer {
-public:
-  Optimizer() {
-    // TODO : ros init, nodehandle, subscriber initilizations here.
-  }
+   public:
+    Optimizer() {
+        // TODO : ros init, nodehandle, subscriber initilizations here.
+    }
 
-  ~Optimizer() {}
+    ~Optimizer() {}
 
-  void run() {}
+    void run() {}
 
-  // TODO : implement your own Callback
+    // TODO : implement your own Callback
 
-private:
-  // TODO : fill the class with appropriate variable
+   private:
+    // TODO : fill the class with appropriate variable
 };
+
+}  // namespace ros_qp
