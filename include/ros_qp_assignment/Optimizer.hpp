@@ -56,11 +56,10 @@ class Optimizer {
         if (summary_.termination_type != ceres::CONVERGENCE) {
             std::cout << "Solution did not converge" << std::endl;
         }
+        auto solution = ros_qp::ConstMapType(parameters_.data(), order, 1);
         std::cout << "Solution:" << std::endl;
-        auto solution =
-            ros_qp::ConstMapType(parameters_.data(), order, 1);
         std::cout << solution << std::endl;
-        std::cout << "Total time:" << std::endl;
+        std::cout << "Convergence time:" << std::endl;
         std::cout << summary_.total_time_in_seconds << std::endl;
     }
 
