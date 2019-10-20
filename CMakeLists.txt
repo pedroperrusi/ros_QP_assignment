@@ -5,7 +5,10 @@ add_definitions(-std=c++11 -Wall -Werror)
 
 find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(catkin REQUIRED COMPONENTS)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  std_msgs	
+)
 
 catkin_package(
   INCLUDE_DIRS
@@ -14,7 +17,7 @@ catkin_package(
 )
 
 include_directories(
-  include
+  ${PROJECT_SOURCE_DIR}/include/ 
   ${catkin_INCLUDE_DIRS}
   ${CERES_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
@@ -36,23 +39,18 @@ add_executable(quadratic_test
   test/quadratic_test.cpp
 )
 
-target_include_directories(quadratic_test
-  PUBLIC
-  ${PROJECT_SOURCE_DIR}/include/
-  ${EIGEN3_INCLUDE_DIR}
-)
-
 target_link_libraries(quadratic_test
   ${catkin_LIBRARIES}
   ${CERES_LIBRARIES}
   ${EIGEN3_LIBRARIES}
 )
 
-# TODO : Your executable
-#add_executable(optimizer_main
-#  src/optimizer_main.cpp
-#)
+add_executable(optimizer_main
+  src/optimizer_main.cpp
+)
 
-#target_link_libraries(optimizer_main
-#  ${catkin_LIBRARIES}
-#)
+target_link_libraries(optimizer_main
+  ${catkin_LIBRARIES}
+  ${CERES_LIBRARIES}
+  ${EIGEN3_LIBRARIES}
+)

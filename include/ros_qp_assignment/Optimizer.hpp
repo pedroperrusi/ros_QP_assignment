@@ -14,24 +14,53 @@
 */
 #pragma once
 
-#include "ros_qp_assignment/types.hpp"
+#include <ceres/ceres.h>
+#include "ros/ros.h"
+#include <std_msgs/Float64MultiArray.h>
 
-namespace ros_qp {
+#include "ros_qp_assignment/unconstrained_qp.hpp"
+
+/** Optimization definitions */
+using ceres::FirstOrderFunction;
+using ceres::GradientProblemSolver;
+using ceres::Problem;
+using ceres::Solve;
+using ceres::Solver;
 
 class Optimizer {
    public:
     Optimizer() {
-        // TODO : ros init, nodehandle, subscriber initilizations here.
+        sub_ = nh_.subscribe("optimization_parameters", 10,
+                             &Optimizer::paramCallback, this);
     }
 
     ~Optimizer() {}
 
-    void run() {}
+    inline void run() { while(ros::ok()) ros::spin(); }
 
-    // TODO : implement your own Callback
-
+    inline void paramCallback(
+        const std_msgs::Float64MultiArray::ConstPtr& msg) {
+        /* Deserialize coeffitients */
+        ros_qp::QuadraticCoeffs coeffs(msg->data.size(), msg->data.data() );
+	parameters_.resize(coeffs.order);
+	std::fill(parameters_.begin(), parameters_.end(), 1);
+        /** Initialize optimization routine */
+        ceres::GradientProblem problem(new ros_qp::UnconstrainedQP(coeffs));
+        ceres::Solve(options_, problem, parameters_.data(), &summary_);
+	if (summary_.termination_type != ceres::CONVERGENCE) {
+	  std::cout << "Solution did not converge" << std::endl;
+	}
+	std::cout << "Solution:" << std::endl;
+	auto solution = ros_qp::ConstMapType(parameters_.data(), coeffs.order, 1);
+	std::cout << solution << std::endl;
+	std::cout << "Total time:" << std::endl;
+	std::cout << summary_.total_time_in_seconds << std::endl;
+    }
+   
    private:
-    // TODO : fill the class with appropriate variable
+    ros::NodeHandle nh_;
+    ros::Subscriber sub_;
+    ceres::GradientProblemSolver::Options options_;
+    ceres::GradientProblemSolver::Summary summary_;
+    std::vector<double> parameters_;
 };
-
-}  // namespace ros_qp
