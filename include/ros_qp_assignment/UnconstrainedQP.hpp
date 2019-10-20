@@ -10,7 +10,7 @@
  */
 #pragma once
 
-#include "ros_qp_assignment/quadratic_coeffs.hpp"
+#include "ros_qp_assignment/QuadraticCoeffs.hpp"
 #include "ros_qp_assignment/types.hpp"
 
 namespace ros_qp {

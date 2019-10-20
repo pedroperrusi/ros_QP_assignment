@@ -18,7 +18,7 @@
 #include <std_msgs/Float64MultiArray.h>
 #include <ros/ros.h>
 
-#include "ros_qp_assignment/unconstrained_qp.hpp"
+#include "ros_qp_assignment/UnconstrainedQP.hpp"
 
 /** Optimization definitions */
 using ceres::FirstOrderFunction;
