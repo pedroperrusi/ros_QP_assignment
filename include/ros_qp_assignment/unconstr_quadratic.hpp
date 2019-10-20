@@ -13,14 +13,34 @@
 #include "ros_qp_assignment/types.hpp"
 
 namespace ros_qp {
+
+/**
+ * @brief Based on the number of elements in an input array, infer what is the
+ * order of the quadratic optimization.
+ *
+ * The number of elements is a function of the system order:
+ *      num_elems = order*(order + 1)
+ *  As num_elems is always positive, the equation assumes only one positive
+ * integer solution:
+ *      order = (-1 + sqrt(1 + 4*num_elems))/2.
+ *
+ * @param num_elems: number of elements in a quadratic function parameter array
+ * @return order of the quadratic function.
+ */
+inline size_t inferOrder(size_t num_elems) {
+    return (-1 + sqrt(1 + 4 * num_elems)) / 2;
+}
+
 /**
  * @brief Quadratic function parameters
  *
  */
 struct QuadraticCoeffs {
-    size_t order;
-    double *data_ptr;
-    QuadraticCoeffs(size_t n, double *input) : order(n), data_ptr(input) {}
+    size_t order;  // quadratic program order
+    double *data_ptr;  // pointer to the input coefficients
+    QuadraticCoeffs(size_t num_elems, double *input) : data_ptr(input) {
+        order = inferOrder(num_elems);
+    }
     MatrixType getQ() const { return MapType(data_ptr, order, order); }
     MatrixType getC() const {
         return MapType(data_ptr + order * order, order, 1);

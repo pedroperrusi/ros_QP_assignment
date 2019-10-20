@@ -45,10 +45,10 @@ class UnconstrQuadratic : public ceres::FirstOrderFunction {
 
 int main(int argc, char **argv) {
     google::InitGoogleLogging(argv[0]);
-    size_t order = 3;
     double parameters[3] = {1, 1, 1};
     double data[] = {5, -2, -1, -2, 4, 3, -1, 3, 5, 2, -35, -47};
-    QuadraticCoeffs coeffs(order, data);
+    size_t num_elems = sizeof(data) / sizeof(data[0]);
+    QuadraticCoeffs coeffs(num_elems, data);
     std::cout << "Q = \n" << coeffs.getQ() << std::endl;
     std::cout << "c = \n" << coeffs.getC() << std::endl;
     ceres::GradientProblemSolver::Options options;
