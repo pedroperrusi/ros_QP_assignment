@@ -16,7 +16,7 @@
 
 #include <ceres/ceres.h>
 #include <std_msgs/Float64MultiArray.h>
-#include "ros/ros.h"
+#include <ros/ros.h>
 
 #include "ros_qp_assignment/unconstrained_qp.hpp"
 

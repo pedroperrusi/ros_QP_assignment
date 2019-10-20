@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+    <node pkg="ros_qp_assignment" type="talker_node" name="talker_node" />
+    <node pkg="ros_qp_assignment" type="optimizer_main" name="optimizer_main" output="screen" />
+</launch>

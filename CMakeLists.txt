@@ -38,13 +38,21 @@ target_link_libraries(ceres_test
 add_executable(quadratic_test
   test/quadratic_test.cpp
 )
-
 target_link_libraries(quadratic_test
   ${catkin_LIBRARIES}
   ${CERES_LIBRARIES}
   ${EIGEN3_LIBRARIES}
 )
 
+# Talker Node
+add_executable(talker_node
+  src/talker_node.cpp
+)
+target_link_libraries(talker_node
+  ${catkin_LIBRARIES}
+)
+
+# Final executable
 add_executable(optimizer_main
   src/optimizer_main.cpp
 )
