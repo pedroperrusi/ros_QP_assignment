@@ -41,8 +41,10 @@ inline size_t inferOrder(const size_t num_elems) {
  *
  */
 struct QuadraticCoeffs {
-    size_t order;                  // quadratic program order
+    size_t order;                        // quadratic program order
     std::vector<double> data_arr;  // pointer to the input coefficients
+    MatrixType q;  // Hessian matrix of shape order by order.
+    MatrixType c;  // Matrix of shape order by 1.
     /**
      * @brief Quadratic Coeffs constructor
      *
@@ -59,25 +61,23 @@ struct QuadraticCoeffs {
         order = inferOrder(num_elems);
         data_arr.resize(num_elems);
         data_arr.assign(in_array, in_array + num_elems);
+        q = ConstMapType(data_arr.data(), order, order);
+        c = ConstMapType(data_arr.data() + order * order, order, 1);
     }
 
     /**
      * @brief Deserialize the Hessian matrix.
-     * 
+     *
      * @return Matrix of shape order by order.
      */
-    inline MatrixType getQ() const {
-        return ConstMapType(data_arr.data(), order, order);
-    }
+    inline MatrixType getQ() const { return q; }
 
     /**
      * @brief Deserialize the C vector.
-     * 
+     *
      * @return Matrix of shape order by 1.
      */
-    inline MatrixType getC() const {
-        return ConstMapType(data_arr.data() + order * order, order, 1);
-    }
+    inline MatrixType getC() const { return c; }
 };
 
 /**
