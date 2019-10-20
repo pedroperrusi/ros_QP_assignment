@@ -13,7 +13,7 @@
 #include "ceres/ceres.h"
 
 #include "ros_qp_assignment/types.hpp"
-#include "ros_qp_assignment/unconstr_quadratic.hpp"
+#include "ros_qp_assignment/unconstrained_qp.hpp"
 
 /** Optimization definitions */
 using ceres::FirstOrderFunction;
