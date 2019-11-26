@@ -10,6 +10,7 @@
 
   <depend>ceres</depend>
   <depend>eigen</depend>
+  <depend>std_msgs</depend>
 
 
 </package>
